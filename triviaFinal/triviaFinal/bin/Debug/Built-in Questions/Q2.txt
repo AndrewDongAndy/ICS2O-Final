@@ -1,0 +1,5 @@
+The smallest positive integer which is divisible by all positive integers less than 5 is
+12
+120
+16
+24

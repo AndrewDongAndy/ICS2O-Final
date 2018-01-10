@@ -1,6 +1,5 @@
-What is the most abundant element on the planet Earth?
-Hydrogen
+What is the most abundant element on Earth?
 Oxygen
+Hydrogen
 Helium
 Nitrogen
-1

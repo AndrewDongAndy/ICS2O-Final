@@ -24,3 +24,17 @@ Y:\ICS2O\Final Project Attempts\triviaFinal\triviaFinal\obj\x86\Debug\triviaFina
 Y:\ICS2O\Final Project Attempts\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.formTitle.resources
 Y:\ICS2O\Final Project Attempts\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.Resources.resources
 Y:\ICS2O\Final Project Attempts\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.vbproj.GenerateResource.Cache
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.exe
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.xml
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.pdb
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\bin\Debug\triviaFinal.exe
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\bin\Debug\triviaFinal.pdb
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\bin\Debug\triviaFinal.xml
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.formMulti.resources
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.formSingle.resources
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.formHighScores.resources
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.formInstructions.resources
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.formTitle.resources
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.Resources.resources
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.vbproj.GenerateResource.Cache
+C:\Users\kdong.CFS\Desktop\GitAndy\ICS2O-Final\triviaFinal\triviaFinal\obj\x86\Debug\triviaFinal.formSummary.resources

@@ -33,16 +33,16 @@ Partial Class formSingle
         Me.timerAnswer = New System.Windows.Forms.Timer(Me.components)
         Me.lblTime = New System.Windows.Forms.Label()
         Me.btnNewRound = New System.Windows.Forms.Button()
+        Me.lblScore = New System.Windows.Forms.Label()
         Me.groupOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblQuestion
         '
-        Me.lblQuestion.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblQuestion.Location = New System.Drawing.Point(11, 19)
-        Me.lblQuestion.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblQuestion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQuestion.Location = New System.Drawing.Point(15, 23)
         Me.lblQuestion.Name = "lblQuestion"
-        Me.lblQuestion.Size = New System.Drawing.Size(215, 77)
+        Me.lblQuestion.Size = New System.Drawing.Size(287, 133)
         Me.lblQuestion.TabIndex = 0
         Me.lblQuestion.Text = "Question"
         '
@@ -50,9 +50,10 @@ Partial Class formSingle
         '
         Me.rbOption1.AutoSize = True
         Me.rbOption1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbOption1.Location = New System.Drawing.Point(61, 69)
+        Me.rbOption1.Location = New System.Drawing.Point(81, 85)
+        Me.rbOption1.Margin = New System.Windows.Forms.Padding(4)
         Me.rbOption1.Name = "rbOption1"
-        Me.rbOption1.Size = New System.Drawing.Size(80, 21)
+        Me.rbOption1.Size = New System.Drawing.Size(93, 24)
         Me.rbOption1.TabIndex = 3
         Me.rbOption1.TabStop = True
         Me.rbOption1.Text = "Option 1"
@@ -62,9 +63,10 @@ Partial Class formSingle
         '
         Me.rbOption2.AutoSize = True
         Me.rbOption2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbOption2.Location = New System.Drawing.Point(61, 96)
+        Me.rbOption2.Location = New System.Drawing.Point(81, 118)
+        Me.rbOption2.Margin = New System.Windows.Forms.Padding(4)
         Me.rbOption2.Name = "rbOption2"
-        Me.rbOption2.Size = New System.Drawing.Size(80, 21)
+        Me.rbOption2.Size = New System.Drawing.Size(93, 24)
         Me.rbOption2.TabIndex = 4
         Me.rbOption2.TabStop = True
         Me.rbOption2.Text = "Option 2"
@@ -74,9 +76,10 @@ Partial Class formSingle
         '
         Me.rbOption3.AutoSize = True
         Me.rbOption3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbOption3.Location = New System.Drawing.Point(61, 123)
+        Me.rbOption3.Location = New System.Drawing.Point(81, 151)
+        Me.rbOption3.Margin = New System.Windows.Forms.Padding(4)
         Me.rbOption3.Name = "rbOption3"
-        Me.rbOption3.Size = New System.Drawing.Size(80, 21)
+        Me.rbOption3.Size = New System.Drawing.Size(93, 24)
         Me.rbOption3.TabIndex = 5
         Me.rbOption3.TabStop = True
         Me.rbOption3.Text = "Option 3"
@@ -86,9 +89,10 @@ Partial Class formSingle
         '
         Me.rbOption0.AutoSize = True
         Me.rbOption0.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbOption0.Location = New System.Drawing.Point(61, 42)
+        Me.rbOption0.Location = New System.Drawing.Point(81, 52)
+        Me.rbOption0.Margin = New System.Windows.Forms.Padding(4)
         Me.rbOption0.Name = "rbOption0"
-        Me.rbOption0.Size = New System.Drawing.Size(80, 21)
+        Me.rbOption0.Size = New System.Drawing.Size(93, 24)
         Me.rbOption0.TabIndex = 6
         Me.rbOption0.TabStop = True
         Me.rbOption0.Text = "Option 0"
@@ -97,9 +101,10 @@ Partial Class formSingle
         'btnSubmit
         '
         Me.btnSubmit.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmit.Location = New System.Drawing.Point(173, 333)
+        Me.btnSubmit.Location = New System.Drawing.Point(231, 410)
+        Me.btnSubmit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(100, 37)
+        Me.btnSubmit.Size = New System.Drawing.Size(133, 46)
         Me.btnSubmit.TabIndex = 7
         Me.btnSubmit.Text = "Submit!"
         Me.btnSubmit.UseVisualStyleBackColor = True
@@ -110,10 +115,12 @@ Partial Class formSingle
         Me.groupOptions.Controls.Add(Me.rbOption1)
         Me.groupOptions.Controls.Add(Me.rbOption2)
         Me.groupOptions.Controls.Add(Me.rbOption3)
-        Me.groupOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.groupOptions.Location = New System.Drawing.Point(15, 108)
+        Me.groupOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.groupOptions.Location = New System.Drawing.Point(20, 160)
+        Me.groupOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.groupOptions.Name = "groupOptions"
-        Me.groupOptions.Size = New System.Drawing.Size(280, 178)
+        Me.groupOptions.Padding = New System.Windows.Forms.Padding(4)
+        Me.groupOptions.Size = New System.Drawing.Size(373, 219)
         Me.groupOptions.TabIndex = 8
         Me.groupOptions.TabStop = False
         Me.groupOptions.Text = "Options"
@@ -126,33 +133,47 @@ Partial Class formSingle
         '
         Me.lblTime.AutoSize = True
         Me.lblTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTime.Location = New System.Drawing.Point(245, 19)
+        Me.lblTime.Location = New System.Drawing.Point(327, 23)
+        Me.lblTime.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTime.Name = "lblTime"
-        Me.lblTime.Size = New System.Drawing.Size(39, 17)
+        Me.lblTime.Size = New System.Drawing.Size(46, 20)
         Me.lblTime.TabIndex = 9
         Me.lblTime.Text = "Time"
         '
         'btnNewRound
         '
         Me.btnNewRound.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewRound.Location = New System.Drawing.Point(41, 333)
+        Me.btnNewRound.Location = New System.Drawing.Point(55, 410)
+        Me.btnNewRound.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewRound.Name = "btnNewRound"
-        Me.btnNewRound.Size = New System.Drawing.Size(100, 37)
+        Me.btnNewRound.Size = New System.Drawing.Size(133, 46)
         Me.btnNewRound.TabIndex = 10
         Me.btnNewRound.Text = "New round"
         Me.btnNewRound.UseVisualStyleBackColor = True
         '
+        'lblScore
+        '
+        Me.lblScore.AutoSize = True
+        Me.lblScore.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScore.Location = New System.Drawing.Point(16, 473)
+        Me.lblScore.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblScore.Name = "lblScore"
+        Me.lblScore.Size = New System.Drawing.Size(53, 20)
+        Me.lblScore.TabIndex = 11
+        Me.lblScore.Text = "Score"
+        '
         'formSingle
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(311, 399)
+        Me.ClientSize = New System.Drawing.Size(415, 515)
+        Me.Controls.Add(Me.lblScore)
         Me.Controls.Add(Me.btnNewRound)
         Me.Controls.Add(Me.lblTime)
         Me.Controls.Add(Me.groupOptions)
         Me.Controls.Add(Me.btnSubmit)
         Me.Controls.Add(Me.lblQuestion)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "formSingle"
         Me.Text = "Single Player"
         Me.groupOptions.ResumeLayout(False)
@@ -171,5 +192,6 @@ Partial Class formSingle
     Friend WithEvents timerAnswer As System.Windows.Forms.Timer
     Friend WithEvents lblTime As System.Windows.Forms.Label
     Friend WithEvents btnNewRound As System.Windows.Forms.Button
+    Friend WithEvents lblScore As System.Windows.Forms.Label
 
 End Class

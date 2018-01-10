@@ -1,6 +1,5 @@
-The winner of the 2014 FIFA World Cup was...
-Netherlands
+The winner of the 2014 FIFA World Cup was
 Germany
+Netherlands
 Uruguay
-Brazil
-1
+None of the other options

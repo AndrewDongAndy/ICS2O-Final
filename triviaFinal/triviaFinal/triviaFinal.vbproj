@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classQuestion.vb" />
+    <Compile Include="classResults.vb" />
     <Compile Include="formMulti.Designer.vb">
       <DependentUpon>formMulti.vb</DependentUpon>
     </Compile>
@@ -96,6 +97,12 @@
       <DependentUpon>formInstructions.vb</DependentUpon>
     </Compile>
     <Compile Include="formInstructions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSummary.Designer.vb">
+      <DependentUpon>formSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formTitle.Designer.vb">
@@ -132,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formInstructions.resx">
       <DependentUpon>formInstructions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSummary.resx">
+      <DependentUpon>formSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formTitle.resx">
       <DependentUpon>formTitle.vb</DependentUpon>

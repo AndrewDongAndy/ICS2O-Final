@@ -1,6 +1,5 @@
-The most populated continent in the world is...
-Africa
+The most populated continent in the world is
+None of the other options
 Europe
 North America
-None of the above
-3
+Africa

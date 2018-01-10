@@ -38,14 +38,30 @@
         'It can be either an integer or a String.
         filePath = "Built-in Questions/Q" & questionID & ".txt"
 
+        'Read the data and shuffle the options to deter memorization of order
+        Dim tmp As New List(Of String)
+        Dim removedIndex As Integer
+        Dim correctOption As String
         questionFile = New IO.StreamReader(filePath)
         With Me
             .Question = questionFile.ReadLine()
             For i As Integer = 1 To 4  'must have four options
-                .Options.Add(questionFile.ReadLine())
+                tmp.Add(questionFile.ReadLine())
             Next
-            .Correct = questionFile.ReadLine()
+
+            'the correct option is ALWAYS the first one in the data file (by construction)
+            correctOption = tmp(0)
+
+            'Transfer the items in tmp to .Options in a random order
+            Do While tmp.Count > 0
+                removedIndex = randInt(0, tmp.Count - 1)
+                .Options.Add(tmp(removedIndex))
+                tmp.RemoveAt(removedIndex)
+            Loop
+            .Correct = .Options.IndexOf(correctOption)
+
         End With
+
         questionFile.Close()
     End Sub
 
@@ -58,4 +74,7 @@
         End If
     End Function
 
+    Private Function randInt(ByVal min As Integer, ByVal max As Integer) As Integer
+        Return Int((max - min + 1) * Rnd()) + min
+    End Function
 End Class
