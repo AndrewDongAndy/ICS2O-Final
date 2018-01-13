@@ -1,39 +1,35 @@
 ﻿Public Class formTitle
 
+    'CALCULATION throughout code to find
+
     Public Result As SingleResult
 
-    Private Sub formTitle_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        Result = lastGame()
+    Private Sub formTitle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
     End Sub
 
-    Private Sub btnSingle_Click(sender As System.Object, e As System.EventArgs) Handles btnSingle.Click
+    Private Sub btnSingle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSingle.Click
+        Me.Hide()
         formSingle.Show()
     End Sub
 
-    Private Sub btnMulti_Click(sender As System.Object, e As System.EventArgs) Handles btnMulti.Click
+    Private Sub btnMulti_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMulti.Click
+        Me.Hide()
         formMulti.Show()
     End Sub
 
-    Private Sub btnInstructions_Click(sender As System.Object, e As System.EventArgs) Handles btnInstructions.Click
+    Private Sub btnInstructions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInstructions.Click
+        Me.Hide()
         formInstructions.Show()
     End Sub
 
-    Private Sub btnHighScores_Click(sender As System.Object, e As System.EventArgs) Handles btnHighScores.Click
+    Private Sub btnHighScores_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHighScores.Click
+        Me.Hide()
         formHighScores.Show()
     End Sub
 
-    Private Function lastGame() As SingleResult
-        'Returns the result from the last save file called "lastSingleGame.txt".
-
-        Dim f As IO.StreamReader
-        f = New IO.StreamReader("lastSingleGame.txt")
-
-        Dim PlayerName As String = f.ReadLine()
-        Dim NumCorrect As Integer = f.ReadLine()
-        Dim NumGuessed As Integer = f.ReadLine()
-        Dim Score As Integer = f.ReadLine()
-
-        Return New SingleResult(PlayerName, NumCorrect, NumGuessed, Score)
-    End Function
-
+    Private Sub btnSettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSettings.Click
+        Me.Hide()
+        formSettings.Show()
+    End Sub
 End Class

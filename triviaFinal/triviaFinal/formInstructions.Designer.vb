@@ -32,7 +32,7 @@ Partial Class formInstructions
         'btnMulti
         '
         Me.btnMulti.Location = New System.Drawing.Point(210, 474)
-        Me.btnMulti.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnMulti.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMulti.Name = "btnMulti"
         Me.btnMulti.Size = New System.Drawing.Size(161, 32)
         Me.btnMulti.TabIndex = 1
@@ -42,7 +42,7 @@ Partial Class formInstructions
         'btnSingle
         '
         Me.btnSingle.Location = New System.Drawing.Point(28, 474)
-        Me.btnSingle.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSingle.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSingle.Name = "btnSingle"
         Me.btnSingle.Size = New System.Drawing.Size(161, 32)
         Me.btnSingle.TabIndex = 0
@@ -66,7 +66,7 @@ Partial Class formInstructions
         Me.txtInstructions.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtInstructions.ForeColor = System.Drawing.SystemColors.Info
         Me.txtInstructions.Location = New System.Drawing.Point(28, 127)
-        Me.txtInstructions.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtInstructions.Margin = New System.Windows.Forms.Padding(2)
         Me.txtInstructions.Multiline = True
         Me.txtInstructions.Name = "txtInstructions"
         Me.txtInstructions.ReadOnly = True
@@ -94,7 +94,7 @@ Partial Class formInstructions
         Me.Controls.Add(Me.lblCategory)
         Me.Controls.Add(Me.txtInstructions)
         Me.Controls.Add(Me.lblHallOfFame)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "formInstructions"
         Me.Text = "How to Play"
         Me.ResumeLayout(False)

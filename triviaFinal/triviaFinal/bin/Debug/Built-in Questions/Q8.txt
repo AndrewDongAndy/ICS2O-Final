@@ -1,0 +1,5 @@
+How many provinces and territories are there in Canada?
+10, 3
+9, 3
+11, 2
+10, 2

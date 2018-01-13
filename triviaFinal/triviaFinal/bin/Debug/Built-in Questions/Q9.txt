@@ -1,0 +1,5 @@
+Let x be an integer. If sin(x) = 1 and 0 < x < 180, what is x?
+90
+45
+60
+150

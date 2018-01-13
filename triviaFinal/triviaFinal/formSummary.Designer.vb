@@ -29,9 +29,10 @@ Partial Class formSummary
         'lblSummary
         '
         Me.lblSummary.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSummary.Location = New System.Drawing.Point(12, 9)
+        Me.lblSummary.Location = New System.Drawing.Point(9, 7)
+        Me.lblSummary.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblSummary.Name = "lblSummary"
-        Me.lblSummary.Size = New System.Drawing.Size(494, 74)
+        Me.lblSummary.Size = New System.Drawing.Size(370, 60)
         Me.lblSummary.TabIndex = 0
         Me.lblSummary.Text = "Summary"
         Me.lblSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -39,24 +40,26 @@ Partial Class formSummary
         'txtSummary
         '
         Me.txtSummary.BackColor = System.Drawing.Color.Green
-        Me.txtSummary.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSummary.Font = New System.Drawing.Font("Verdana", 10.0!)
         Me.txtSummary.ForeColor = System.Drawing.SystemColors.Info
-        Me.txtSummary.Location = New System.Drawing.Point(12, 98)
-        Me.txtSummary.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtSummary.Location = New System.Drawing.Point(9, 80)
+        Me.txtSummary.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSummary.Multiline = True
         Me.txtSummary.Name = "txtSummary"
-        Me.txtSummary.Size = New System.Drawing.Size(494, 417)
+        Me.txtSummary.ReadOnly = True
+        Me.txtSummary.Size = New System.Drawing.Size(372, 340)
         Me.txtSummary.TabIndex = 3
         '
         'formSummary
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(518, 526)
+        Me.ClientSize = New System.Drawing.Size(388, 427)
         Me.Controls.Add(Me.txtSummary)
         Me.Controls.Add(Me.lblSummary)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "formSummary"
-        Me.Text = "formSummary"
+        Me.Text = "Summary"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

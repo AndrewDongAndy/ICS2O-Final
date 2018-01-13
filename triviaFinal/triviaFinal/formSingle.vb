@@ -1,35 +1,58 @@
 ﻿Public Class formSingle
 
-    Private question As Question
-    Private prompts As Dictionary(Of String, List(Of String))
-    Private points As Integer
-    Private answerTime As Double  'number of seconds taken for the user to answer
+    Private prompts As Dictionary(Of String, List(Of String))  'constant: prompts that can be displayed
+    Private unplayed As List(Of Integer)  'stores which questions were not yet played
 
-    Private currentQuestion As Integer
-
-    Private unplayed As List(Of Integer)
-
-
+    'Constants: "shared" data
     Private Const maxPoints As Integer = 1000  'points given if user answered correctly "instantly"
-    Private Const numQuestions As Integer = 5  'the number of questions we are allowed to choose from (randomly)
-    'TODO: make at least 10 question files
+    Private Const numQuestions As Integer = 10  'the number of questions we are allowed to choose from (randomly)
+    Private Const questionsPerRound As Integer = 10  'how many questions per round
+    Private Const autoStartRound As Boolean = True  'whether or not to start next round automatically
 
-    Private Sub formSingle_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    'Data about the player for this round
+    Private player As SingleResult
+    Private playerName As String
+    Private scores As New List(Of Integer)
+
+    'Data for a given question
+    Private question As Question  'stores a question
+    Private answerTime As Double  'number of seconds taken for the user to answer
+    Private correct As Boolean  'if this question was answered correctly
+    Private pointsForRound As Integer  'points for this question
+
+    Private Sub formSingle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Randomize()
         initPrompts()
-        initUnplayed()
+
+        'Initialize the unplayed list for a new round
+        unplayed = range(0, numQuestions)
+
+        'Get the player's name
+        Do While True
+            playerName = InputBox("What's your name?", "Name", "Player")
+            If playerName <> Nothing Then
+                Exit Do
+            End If
+            MsgBox("Sorry, invalid name.")
+        Loop
+
+        btnStart.Enabled = True
+        btnSubmit.Enabled = False
     End Sub
 
-    Private Sub btnNewRound_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewRound.Click
-        'First, choose a random question, remove it, and load it.
+    Private Sub nextQuestion()
+        Dim currentQuestion As Integer
 
-        'TODO: make sure will not go out of range
+        'First, choose a random question, remove it, and load it.
         currentQuestion = unplayed(randInt(0, unplayed.Count - 1))
         unplayed.Remove(currentQuestion)
         loadQuestion(currentQuestion)
 
+        'Then, start the timer.
         answerTime = 0
         timerAnswer.Start()
+
+        btnSubmit.Enabled = True
     End Sub
 
     Private Sub timerAnswer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles timerAnswer.Tick
@@ -37,32 +60,55 @@
         answerTime += timerAnswer.Interval
     End Sub
 
+    Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
+        btnStart.Enabled = False
+        nextQuestion()
+    End Sub
+
     Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
+        pointsForRound = pointsAfterTime(answerTime)
+
+        'First, stop the timer.
         timerAnswer.Stop()
-        
-        'Get the button that was selected.
-        Dim selectedButton As RadioButton
-        selectedButton = groupOptions.Controls _
-                         .OfType(Of RadioButton)() _
-                         .FirstOrDefault(Function(r) r.Checked)
+        lblTime.Text = Nothing
 
+        'Handle the option selected, if any.
         Try
-            If selectedButton.Name = "rbOption" & question.Correct Then
-                'If correct, display correct message and update score
-                points += pointsAfterTime(answerTime)
-                displayPoints(lblScore, points)
-                MsgBox(randMsg("Correct"))
+            If selectedButton().Name = "rbOption" & question.Correct Then
+                correct = True
             Else
-                'Otherwise, display incorrect message; no penalty
-                MsgBox(randMsg("Incorrect"))
+                correct = False
             End If
-
-            'Uncheck the selected RadioButton for the next round
-            selectedButton.Checked = False
         Catch ex As NullReferenceException
+            correct = False
             MsgBox("Well, at least try... next time!")
         End Try
 
+        'Add the score for this round
+        If correct Then
+            addScore(pointsForRound)
+        Else
+            addScore(0)
+        End If
+
+        'Display the result if the option autoStartRound is off.
+        If Not autoStartRound Then
+            If correct Then
+                MsgBox(randMsg("Correct"))
+            Else
+                MsgBox(randMsg("Incorrect"))
+            End If
+        End If
+
+        'If the user has already played the max number of questions, redirect.
+        If scores.Count = questionsPerRound Then
+            formSummary.displayInfo(New SingleResult(playerName, scores))
+            formSummary.Show()
+            Me.Close()
+            Exit Sub
+        End If
+
+        nextQuestion()
     End Sub
 
     Private Sub initPrompts()
@@ -81,29 +127,31 @@
         Next
     End Sub
 
-    Private Sub initUnplayed()
-        'Initializes the unplayed list for a new round.
-        'Note that this is equivalent to list(range(n)) in Python 3.
-        unplayed = New List(Of Integer)
-        For i As Integer = 1 To numQuestions
-            unplayed.Add(i)
+    Private Function range(ByVal start As Integer, ByVal finish As Integer,
+                           Optional ByVal skip As Integer = 1) As List(Of Integer)
+        'Equivalent to list(range(start, finish, skip)) in Python.
+
+        Dim lst As New List(Of Integer)
+        For i As Integer = start To finish - 1 Step skip
+            lst.Add(i)
         Next
-    End Sub
+        Return lst
+    End Function
 
     Private Sub loadQuestion(ByVal questionID)
+        'Loads a question into the proper controls.
+
         question = New Question(questionID)
-
-        'Load question
         lblQuestion.Text = question.Question
-
-        'Load options
         For i As Integer = 0 To 3
             groupOptions.Controls(i).Text = question.Options(i)
         Next
     End Sub
 
-    Private Sub displayPoints(ByVal lbl As Label, ByVal pts As Integer)
-        lbl.Text = "Score: " & pts
+    Private Sub addScore(ByVal pts As Integer)
+        'Adds the score to the list and updates the score to the user in lblScore.
+        scores.Add(pts)
+        lblScore.Text = "Score: " & scores.Sum()
     End Sub
 
     Private Function randInt(ByVal min As Integer, ByVal max As Integer) As Integer
@@ -118,7 +166,15 @@
 
     Private Function pointsAfterTime(ByVal milliseconds As Integer) As Integer
         'Returns the number of points the user would have after a given number of seconds.
-        Return maxPoints * Math.Pow(Math.E, -milliseconds / 4000)
+        Return maxPoints * Math.Pow(Math.E, -milliseconds / 6000)
+    End Function
+
+    Private Function selectedButton() As RadioButton
+        'Returns the selected radio button from the groupOptions control collection.
+        'If no options are selected, a default RadioButton object is returned.
+        Return groupOptions.Controls _
+               .OfType(Of RadioButton)() _
+               .FirstOrDefault(Function(r) r.Checked)  'lambda/anonymous function!
     End Function
 
 End Class

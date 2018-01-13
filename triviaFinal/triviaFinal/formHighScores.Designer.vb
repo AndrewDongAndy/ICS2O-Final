@@ -32,7 +32,7 @@ Partial Class formHighScores
         'btnMulti
         '
         Me.btnMulti.Location = New System.Drawing.Point(210, 474)
-        Me.btnMulti.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnMulti.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMulti.Name = "btnMulti"
         Me.btnMulti.Size = New System.Drawing.Size(161, 32)
         Me.btnMulti.TabIndex = 1
@@ -42,7 +42,7 @@ Partial Class formHighScores
         'btnSingle
         '
         Me.btnSingle.Location = New System.Drawing.Point(28, 474)
-        Me.btnSingle.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSingle.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSingle.Name = "btnSingle"
         Me.btnSingle.Size = New System.Drawing.Size(161, 32)
         Me.btnSingle.TabIndex = 0
@@ -66,7 +66,7 @@ Partial Class formHighScores
         Me.txtScores.Font = New System.Drawing.Font("Courier New", 10.0!)
         Me.txtScores.ForeColor = System.Drawing.SystemColors.Info
         Me.txtScores.Location = New System.Drawing.Point(28, 127)
-        Me.txtScores.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtScores.Margin = New System.Windows.Forms.Padding(2)
         Me.txtScores.Multiline = True
         Me.txtScores.Name = "txtScores"
         Me.txtScores.ReadOnly = True
@@ -94,7 +94,7 @@ Partial Class formHighScores
         Me.Controls.Add(Me.lblCategory)
         Me.Controls.Add(Me.txtScores)
         Me.Controls.Add(Me.lblHallOfFame)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "formHighScores"
         Me.Text = "Hall of Fame"
         Me.ResumeLayout(False)

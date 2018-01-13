@@ -72,12 +72,19 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.vb" />
     <Compile Include="classQuestion.vb" />
     <Compile Include="classResults.vb" />
     <Compile Include="formMulti.Designer.vb">
       <DependentUpon>formMulti.vb</DependentUpon>
     </Compile>
     <Compile Include="formMulti.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSettings.Designer.vb">
+      <DependentUpon>formSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSettings.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formSingle.vb">
@@ -130,6 +137,9 @@
   <ItemGroup>
     <EmbeddedResource Include="formMulti.resx">
       <DependentUpon>formMulti.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSettings.resx">
+      <DependentUpon>formSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formSingle.resx">
       <DependentUpon>formSingle.vb</DependentUpon>

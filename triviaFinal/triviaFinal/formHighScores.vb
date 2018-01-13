@@ -1,6 +1,6 @@
 ﻿Public Class formHighScores
 
-    Private numTabs As Integer = 4
+    Private Const numTabs As Integer = 4
 
     Private Sub formHighScores_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         displayScores("Single")
@@ -58,8 +58,13 @@
             txtScores.AppendText(score)
 
             numEntries += 1
+
+            'NOTE: hard-coded display 10 entries
         Loop While Not scoresFile.EndOfStream() And numEntries < 10
 
     End Sub
 
+    Private Sub formHighScores_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        formTitle.Show()
+    End Sub
 End Class
