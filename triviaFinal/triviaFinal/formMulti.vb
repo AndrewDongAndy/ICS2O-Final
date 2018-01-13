@@ -46,7 +46,7 @@
         For Each player As String In keysDict.Keys
             For c As Integer = 0 To keysDict(player).Count - 1
                 Dim picBox As New PictureBox
-                picBox = Controls("pic" & player & "Key" & c)
+                picBox = Controls(String.Format("pic{0}Key{1}", player, c))
                 displayKey(keysDict(player)(c), picBox)
             Next
         Next
@@ -55,7 +55,7 @@
 
     Private Sub displayKey(ByVal key As Char, ByVal pic As PictureBox)
         'Displays the given character in the given PictureBox.
-        pic.Image = Image.FromFile("Keys/" & key & ".png")
+        pic.Image = Image.FromFile(String.Format("Keys/{0}.png", key))
     End Sub
 
     Private Sub nextQuestion()

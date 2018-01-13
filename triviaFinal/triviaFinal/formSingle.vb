@@ -7,7 +7,9 @@
     Private Const maxPoints As Integer = 1000  'points given if user answered correctly "instantly"
     Private Const numQuestions As Integer = 10  'the number of questions we are allowed to choose from (randomly)
     Private Const questionsPerRound As Integer = 10  'how many questions per round
-    Private Const autoStartRound As Boolean = True  'whether or not to start next round automatically
+    Private Const autoStartRound As Boolean = False
+    'above: whether or not to start next round automatically, i.e. prompts on whether
+    'the answer was correct, what the correct answer was if user's answer was wrong
 
     'Data about the player for this round
     Private player As SingleResult
@@ -19,6 +21,7 @@
     Private answerTime As Double  'number of seconds taken for the user to answer
     Private correct As Boolean  'if this question was answered correctly
     Private pointsForRound As Integer  'points for this question
+    Private message As String  'prompt (correct/incorrect) for this question
 
     Private Sub formSingle_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Randomize()
@@ -29,13 +32,14 @@
 
         'Get the player's name
         Do While True
-            playerName = InputBox("What's your name?", "Name", "Player")
+            playerName = InputBox("What's your name?", "Name")
             If playerName <> Nothing Then
                 Exit Do
             End If
             MsgBox("Sorry, invalid name.")
         Loop
 
+        'Initial states of the buttons
         btnStart.Enabled = True
         btnSubmit.Enabled = False
     End Sub
@@ -48,11 +52,9 @@
         unplayed.Remove(currentQuestion)
         loadQuestion(currentQuestion)
 
-        'Then, start the timer.
+        'Then, reset answer time and start the timer.
         answerTime = 0
         timerAnswer.Start()
-
-        btnSubmit.Enabled = True
     End Sub
 
     Private Sub timerAnswer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles timerAnswer.Tick
@@ -62,11 +64,11 @@
 
     Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
         btnStart.Enabled = False
+        btnSubmit.Enabled = True
         nextQuestion()
     End Sub
 
     Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
-        pointsForRound = pointsAfterTime(answerTime)
 
         'First, stop the timer.
         timerAnswer.Stop()
@@ -74,41 +76,40 @@
 
         'Handle the option selected, if any.
         Try
-            If selectedButton().Name = "rbOption" & question.Correct Then
-                correct = True
-            Else
-                correct = False
-            End If
+            correct = (selectedButton().Name = "rbOption" & question.Correct)
+            selectedButton().Checked = False
         Catch ex As NullReferenceException
             correct = False
+            'Regardless of the value of autoStartRound, display
+            'the following message if no option was selected.
             MsgBox("Well, at least try... next time!")
         End Try
 
         'Add the score for this round
-        If correct Then
-            addScore(pointsForRound)
-        Else
-            addScore(0)
-        End If
+        pointsForRound = If(correct, pointsAfterTime(answerTime), 0)
+        addScore(pointsForRound)
 
         'Display the result if the option autoStartRound is off.
         If Not autoStartRound Then
-            If correct Then
-                MsgBox(randMsg("Correct"))
-            Else
-                MsgBox(randMsg("Incorrect"))
-            End If
+            'Ternary operator!
+            message = If(correct,
+                         String.Format("{0} You earned {1} points.", randMsg("Correct"), pointsForRound),
+                         String.Format("{0} The correct answer was {1}.", randMsg("Incorrect"), question.CorrectAnswer))
+            MsgBox(message)
         End If
 
-        'If the user has already played the max number of questions, redirect.
+        'Handle the end of the game.
         If scores.Count = questionsPerRound Then
+            'If the user has already played the set number of questions, redirect the user.
             formSummary.displayInfo(New SingleResult(playerName, scores))
             formSummary.Show()
-            Me.Close()
             Exit Sub
+            Me.Close()
+        Else
+            'Otherwise, continue on with the next round.
+            nextQuestion()
         End If
 
-        nextQuestion()
     End Sub
 
     Private Sub initPrompts()
@@ -155,6 +156,7 @@
     End Sub
 
     Private Function randInt(ByVal min As Integer, ByVal max As Integer) As Integer
+        'Returns an integer between min and max, inclusive.
         Return Int((max - min + 1) * Rnd()) + min
     End Function
 
