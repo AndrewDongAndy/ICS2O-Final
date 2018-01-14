@@ -59,8 +59,7 @@
 
             numEntries += 1
 
-            'NOTE: hard-coded display 10 entries
-        Loop While Not scoresFile.EndOfStream() And numEntries < 10
+        Loop While Not scoresFile.EndOfStream() And numEntries < highScoreEntries
 
     End Sub
 

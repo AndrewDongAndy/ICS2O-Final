@@ -1,4 +1,8 @@
-﻿Public Class SingleResult
+﻿'Includes the Class declarations for a result for single-player mode,
+'a result for multiplayer mode, and a class to hold a single entry.
+
+
+Public Class SingleResult
 
     Implements IResult
 
@@ -65,3 +69,29 @@ Interface IResult
     ReadOnly Property Percentage As Double
     ReadOnly Property Total As Integer
 End Interface
+
+
+Class SingleHighScoreEntry
+
+    'Scores a high score entry for the single-player mode.
+
+    Inherits Tuple(Of String, Integer)
+
+    Public Sub New(ByVal name As String, ByVal score As Integer)
+        MyBase.New(name, score)
+    End Sub
+
+    Friend ReadOnly Property Name As String
+        Get
+            Return Me.Item1
+        End Get
+    End Property
+
+    Friend ReadOnly Property Score As Integer
+        Get
+            Return Me.Item2
+        End Get
+    End Property
+
+
+End Class

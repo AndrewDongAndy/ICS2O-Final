@@ -9,7 +9,12 @@
     Friend Options As New List(Of String)
     Friend Correct As Integer
 
-    Public Sub New(ByVal questionID)
+    'NOTE: this number (below) should be one more than the number of
+    'the largest file number in the Built-in Questions directory.
+    Private Const directory As String = "Built-in Questions"
+    Friend Const NumQuestions As Integer = 16  'number of available questions available to choose from
+
+    Friend Sub New(ByVal questionID)
         'Constructor for the Question class
 
         'Note that the question ID is the text proceeding the 'Q' prefix in the question file.
@@ -39,29 +44,22 @@
                 tmp.RemoveAt(removedIndex)
             Loop
 
-            'Load the correct option.
+            'Load the correct option index
             .Correct = .Options.IndexOf(correctOption)
         End With
 
         questionFile.Close()
     End Sub
 
-    Public Function IsCorrect(ByVal answer As Integer) As Boolean
+    Friend Function IsCorrect(ByVal answer As Integer) As Boolean
         'Takes the entered index as an argument, and returns whether that index is the correct answer.
-        If answer = Me.Correct Then
-            Return True
-        Else
-            Return False
-        End If
+        Return (answer = Me.Correct)
     End Function
 
-    Public ReadOnly Property CorrectAnswer As String
+    Friend ReadOnly Property CorrectAnswer As String
+        'Property of the correct answer for this question (not the correct index)
         Get
             Return Me.Options(Me.Correct)
         End Get
     End Property
-
-    Private Function randInt(ByVal min As Integer, ByVal max As Integer) As Integer
-        Return Int((max - min + 1) * Rnd()) + min
-    End Function
 End Class

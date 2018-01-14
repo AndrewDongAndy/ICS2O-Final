@@ -4,3 +4,6 @@ Unfortunately, that is incorrect.
 Incorrect.
 Better luck next time.
 Close!
+Nice try, but that is wrong.
+Unlucky; that is incorrect.
+Ooh... Nice try.

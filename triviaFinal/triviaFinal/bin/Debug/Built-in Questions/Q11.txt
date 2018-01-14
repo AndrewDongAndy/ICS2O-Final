@@ -1,0 +1,5 @@
+What is the value of 36 * 22?
+792
+489
+836
+684

@@ -1,48 +1,46 @@
 ﻿Public Class formMulti
 
-    Private keysDict As Dictionary(Of String, List(Of Char))
-    Private leftKeys As New List(Of Char) From {"1", "Q", "S", "X"}
-    Private rightKeys As New List(Of Char) From {"9", "O", "P", "L"}
-
     '=====================Copied from formSingle=====================
 
-    Private prompts As Dictionary(Of String, List(Of String))  'constant: prompts that can be displayed
     Private unplayed As List(Of Integer)  'stores which questions were not yet played
-
-    'Constants: "shared" data
-    Private Const maxPoints As Integer = 1000  'points given if user answered correctly "instantly"
-    Private Const numQuestions As Integer = 10  'the number of questions we are allowed to choose from (randomly)
-    Private Const questionsPerRound As Integer = 10  'how many questions per round
-    Private Const autoStartRound As Boolean = True  'whether or not to start next round automatically
 
     'Data about the players for this round
     Private scores As Dictionary(Of String, Integer)
+    Private player1 As String  'name of first player
+    Private player2 As String  'name of second player
 
     'Data for a given question
     Private question As Question  'stores a question
     Private correct As Boolean  'if this question was answered correctly
 
     Private Sub formMulti_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        KeyPreview = True
+        Randomize()
 
-        initKeysAndDict()
+        KeyPreview = False
+        initKeysPicBoxes()
+
+        player1 = InputBox("Enter name of player 1.", "Name")
+        player2 = InputBox("Enter name of player 2.", "Name")
+
+        MsgBox(String.Format("{0} will be on the left, and {1} will be on the right.", player1, player2))
+
+        'Initialize the unplayed list for a new match
+        unplayed = range(0, triviaFinal.Question.NumQuestions)
+
+        scores = New Dictionary(Of String, Integer)
+        scores.Add("Left", 0)
+        scores.Add("Right", 0)
+        updateScores()
     End Sub
 
     Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
         nextQuestion()
     End Sub
 
-    Private Sub initKeysAndDict()
+    Private Sub initKeysPicBoxes()
+        'Initializes the PictureBox objects of the form to display
+        'which keys correspond to which player and which option.
 
-        'Initializes the keys dictionary and the PictureBox objects
-        'for which keys correspond to which player and which option.
-
-        'Initialize Dictionary directly from the leftKeys and rightKeys Lists
-        keysDict = New Dictionary(Of String, List(Of Char))
-        keysDict.Add("Left", leftKeys)
-        keysDict.Add("Right", rightKeys)
-
-        'Initialize Keys images
         For Each player As String In keysDict.Keys
             For c As Integer = 0 To keysDict(player).Count - 1
                 Dim picBox As New PictureBox
@@ -50,66 +48,73 @@
                 displayKey(keysDict(player)(c), picBox)
             Next
         Next
-
-    End Sub
-
-    Private Sub displayKey(ByVal key As Char, ByVal pic As PictureBox)
-        'Displays the given character in the given PictureBox.
-        pic.Image = Image.FromFile(String.Format("Keys/{0}.png", key))
     End Sub
 
     Private Sub nextQuestion()
         Dim currentQuestion As Integer
 
-        'First, choose a random question, remove it, and load it.
+        'Choose a random question and remove it.
         currentQuestion = unplayed(randInt(0, unplayed.Count - 1))
         unplayed.Remove(currentQuestion)
-        loadQuestion(currentQuestion)
+        question = New Question(currentQuestion)
 
+        'First, perform the countdown.
+        Me.Hide()
+        performCountdown(3)
+
+        'Then, load the question (after performCountdown
+        'automatically redisplays this form to the user)
+        loadQuestion(question, lblQuestion, lblOption0, lblOption1, lblOption2, lblOption3)
+        KeyPreview = True
     End Sub
-
-    Private Function randInt(ByVal min As Integer, ByVal max As Integer) As Integer
-        Return Int((max - min + 1) * Rnd()) + min
-    End Function
-
-    Private Sub loadQuestion(ByVal questionID)
-        'Loads a question into the proper controls.
-
-        question = New Question(questionID)
-        lblQuestion.Text = question.Question
-        For i As Integer = 0 To 3
-            Controls("lblOption" & i).Text = question.Options(i)
-        Next
-    End Sub
-
-    Private Function range(ByVal start As Integer, ByVal finish As Integer,
-                       Optional ByVal skip As Integer = 1) As List(Of Integer)
-        'Equivalent to list(range(start, finish, skip)) in Python.
-
-        Dim lst As New List(Of Integer)
-        For i As Integer = start To finish - 1 Step skip
-            lst.Add(i)
-        Next
-        Return lst
-    End Function
 
     Private Sub formMulti_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
-        If leftKeys.Contains(e.KeyChar) Then
-
+        'Do nothing if the entry is invalid.
+        If IsNothing(selectionPlayer(e.KeyChar)) Then
+            Exit Sub
         End If
+
+        'Otherwise, the selection does indeed correspond to a selection
+        'of a player, so no more input is allowed.
+        KeyPreview = False
+
+        'Get the name of the player who answered.
+        Dim answeredPlayer As String
+        answeredPlayer = If(selectionPlayer(e.KeyChar) = "Left", player1, player2)
+
+        'Check if the answer is correct and display the corresponding message to the user.
+        If selectionOption(e.KeyChar) = question.Correct Then
+            MsgBox(String.Format("{0} {1} gains 1 point. The correct answer was {2}.",
+                                 randPrompt("Correct"), answeredPlayer, question.CorrectAnswer))
+
+            'Increment the score if it is correct.
+            scores(selectionPlayer(e.KeyChar)) += 1
+        Else
+            MsgBox(String.Format("{0} {1} loses 1 point. The correct answer was {2}.",
+                                 randPrompt("Incorrect"), answeredPlayer, question.CorrectAnswer))
+
+            'Otherwise, the answer was incorrect, so decrement the score.
+            scores(selectionPlayer(e.KeyChar)) -= 1
+        End If
+
+        updateScores()
+
+        If Math.Max(scores.Values(0), scores.Values(1)) = 10 Then  'hard-coded first to 10 wins
+            'redirect the user
+        Else : nextQuestion()
+        End If
+
     End Sub
 
-    Private Function selectionPlayer(ByVal c As Char) As String
-        If leftKeys.Contains(c) Then
-            Return "Left"
-        ElseIf rightKeys.Contains(c) Then
-            Return "Right"
-        Else
-            Return Nothing
-        End If
-    End Function
+    Private Sub updateScores()
+        'Updates the scores to the user (through the labels).
+        lblLeftScore.Text = player1 & ": " & scores("Left")
+        lblRightScore.Text = player2 & ": " & scores("Right")
+    End Sub
 
-    Private Function selectionOption(ByVal c As Char) As String
-        Return keysDict(selectionPlayer(c)).IndexOf(c)
-    End Function
+    Private Sub performCountdown(ByVal seconds As Integer)
+        formCountdown.Show()
+        formCountdown.countdownFrom(seconds)
+    End Sub
+
 End Class
